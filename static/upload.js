@@ -67,19 +67,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    window.addEventListener('online', async () => {
-        offlineIndicator.style.display = 'none';
-        await flushQueue();
-    });
+    // window.addEventListener('online', async () => {
+    //     offlineIndicator.style.display = 'none';
+    //     await flushQueue();
+    // });
 
-    window.addEventListener('offline', () => {
-        offlineIndicator.style.display = 'block';
-    });
+    // window.addEventListener('offline', () => {
+    //     offlineIndicator.style.display = 'block';
+    // });
 
-    // Check offline status on load
-    if (!navigator.onLine) {
-        offlineIndicator.style.display = 'block';
-    }
+    // // Check offline status on load
+    // if (!navigator.onLine) {
+    //     offlineIndicator.style.display = 'block';
+    // }
 
     // ---------- HELPER: POINT IN POLYGON ----------
     function isPointInPolygon(lat, lng, poly) {
@@ -244,9 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3. PERFORM SPEED TEST
         let downloadSpeed = null;
-        if (navigator.onLine) {
+        if (true) { 
             contributionStatus.textContent = "⚡ Running speed test (~1s)...";
-            contributionStatus.style.color = "#0ea5e9";
             downloadSpeed = await performSpeedTest();
         }
         
@@ -265,13 +264,13 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // ---------- OFFLINE-FIRST SUBMIT ----------
-        if (!navigator.onLine) {
-            enqueue(payload);
-            contributionStatus.textContent = "📴 Offline. Data saved locally and will sync later.";
-            contributionStatus.style.color = "#fbbf24";
-            contributeBtn.disabled = false;
-            return;
-        }
+        // if (!navigator.onLine) {
+        //     enqueue(payload);
+        //     contributionStatus.textContent = "📴 Offline. Data saved locally and will sync later.";
+        //     contributionStatus.style.color = "#fbbf24";
+        //     contributeBtn.disabled = false;
+        //     return;
+        // }
 
         try {
             contributionStatus.textContent = "☁️ Submitting data...";
