@@ -1,5 +1,5 @@
 // ================== CONFIG ==================
-const API_BASE = "https://vitc-signal-mapper.onrender.com";
+const API_BASE = window.location.origin;
 
 // ================== CAMPUS POLYGON ==================
 const VIT_POLYGON_COORDS = [
@@ -29,7 +29,7 @@ const map = L.map("map", {
     maxBoundsViscosity: 0.8,
     minZoom: 15,
     maxZoom: 19,
-    zoomControl: false  // We'll add custom position
+    zoomControl: true  // We'll add custom position
 }).setView([12.8406, 80.1534], 17);
 
 // Add zoom control to bottom right
@@ -180,7 +180,7 @@ async function fetchSamples() {
                         ? (Math.max(-120, Math.min(-50, s.signal_strength || -120)) + 120) / 70
                         : Math.min(100, s.download_speed || 0) / 100;
 
-                return [s.lat, s.lng, weight];
+                return [parseFloat(s.lat), parseFloat(s.lng), weight];
             });
 
         heatLayer.setLatLngs(points);

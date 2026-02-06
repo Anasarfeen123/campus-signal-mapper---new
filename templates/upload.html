@@ -322,6 +322,36 @@
             h1 { font-size: 1.5rem; }
             button { padding: 16px; font-size: 1rem; }
         }
+    /* Specifically target select options to fix the white-on-white text issues */
+select option {
+    background-color: #1e293b; /* A lighter blue-gray that matches your --bg theme */
+    color: #f1f5f9 !important; /* Force off-white text to ensure visibility */
+    padding: 12px;
+}
+
+/* Ensure consistent look on mobile browsers and systems with forced dark modes */
+@media (prefers-color-scheme: dark) {
+    select option {
+        background-color: #0f172a;
+        color: #f1f5f9;
+    }
+}
+
+/* Enhanced focus state for a premium "glow" effect on inputs */
+select:focus, input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(14, 165, 233, 0.1); /* Subtle blue tint on focus */
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
+}
+
+/* Improve the "glassmorphism" look of the main container */
+.container {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
     </style>
 </head>
 

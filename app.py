@@ -21,22 +21,24 @@ app.config['SECRET_KEY'] = os.environ.get(
 )
 
 # Detect if running locally or on Render
+# In app.py, modify the DATABASE_URL handling:
 DATABASE_URL = os.environ.get('DATABASE_URL')
-if not DATABASE_URL:
-    raise RuntimeError("DATABASE_URL not set. Run '$env:DATABASE_URL = \"sqlite:///signals.db\"' for local testing.")
 
-# Configure Engine based on DB type
+if DATABASE_URL and DATABASE_URL.startswith("postgresql://"):
+    # Fix for SQLAlchemy 2.0 compatibility
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
+
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL not set.")
+
+# Configure Engine
 if "sqlite" in DATABASE_URL:
-    # Local SQLite Configuration
     engine = create_engine(DATABASE_URL, poolclass=NullPool)
 else:
-    # Render PostgreSQL Configuration
+    # Use the modified URL with the required SSL argument
     engine = create_engine(
         DATABASE_URL,
-        poolclass=NullPool,
-        connect_args={
-            "sslmode": "require"
-        }
+        poolclass=NullPool
     )
 
 # -------------------------------------------------
