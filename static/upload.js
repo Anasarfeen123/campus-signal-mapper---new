@@ -21,6 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const networkSelect = document.getElementById('network-select');
     const signalInput = document.getElementById('signal-input');
 
+signalInput.addEventListener('input', (e) => {
+    let val = parseInt(e.target.value);
+    if (!isNaN(val) && val > 0) {
+        // If user enters a positive number like 95, flip it to -95
+        e.target.value = -Math.abs(val);
+    }
+});
+
     // ---------- OFFLINE QUEUE ----------
     function getQueue() {
         return JSON.parse(localStorage.getItem(OFFLINE_QUEUE_KEY) || "[]");
@@ -321,4 +329,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---------- INITIAL SYNC ----------
     flushQueue();
+    
 });
