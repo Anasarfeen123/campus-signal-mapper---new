@@ -5,7 +5,7 @@ app.use(express.json());
 
 app.post("/data", async (req, res) => {
   try {
-    const response = await fetch("https://vitc-signal-mapper.onrender.com/api", {
+    const response = await fetch("https://vitc-signal-mapper.onrender.com/api/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
