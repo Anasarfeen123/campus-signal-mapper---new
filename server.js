@@ -17,14 +17,15 @@ app.post("/data", async (req, res) => {
     res.send(data);
 
   } catch (err) {
-    console.log(err);
+    console.log("FETCH ERROR:", err);
     res.status(500).send("Error");
   }
 });
 
 app.get("/", (req, res) => {
-  res.send("Proxy alive ;)");
+  res.send("Proxy alive 🚀");
 });
+
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log(`Proxy running on port ${PORT}`);
